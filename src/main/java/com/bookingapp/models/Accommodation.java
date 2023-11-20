@@ -41,9 +41,9 @@ public class Accommodation {
 
     @ManyToMany
     @JoinTable(
-            name = "accomodations_amenteties",
-            joinColumns = @JoinColumn(name = "categories_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id")
+            name = "accomodations_amenities",
+            joinColumns = @JoinColumn(name = "accommodation_id"),
+            inverseJoinColumns = @JoinColumn(name = "amenity_id")
     )
     private List<Amenity> amenities;
 
