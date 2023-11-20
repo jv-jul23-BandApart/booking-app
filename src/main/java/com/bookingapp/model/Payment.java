@@ -1,4 +1,4 @@
-package com.bookingapp.models;
+package com.bookingapp.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
