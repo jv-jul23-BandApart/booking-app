@@ -12,7 +12,7 @@ public record UserRegistrationRequestDto(
         @NotBlank
         @Email
         String email,
-        @Length(min = 4, max = 50)
+        @Length(min = 4, max = 50, message = "length should be from 8 to 50")
         @NotNull
         @Pattern(
                 regexp = "^[a-zA-Z0-9]{6,32}$",

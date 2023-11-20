@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 public record UserLoginRequestDto(
-        @Email
         @NotBlank
+        @Email(message = "must match pattern 'username@domain.com'")
         String email,
         @Length(min = 4, max = 50)
         @NotBlank
