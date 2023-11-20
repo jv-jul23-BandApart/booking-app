@@ -1,9 +1,11 @@
 package com.bookingapp.dto.user;
 
+import com.bookingapp.validation.FieldMatch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
+@FieldMatch(fields = {"password", "repeatPassword"},message = "The password fields must match")
 public record UserRegistrationRequestDto(
         @NotBlank
         @Email
