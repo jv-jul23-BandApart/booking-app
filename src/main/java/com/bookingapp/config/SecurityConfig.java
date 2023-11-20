@@ -39,7 +39,7 @@ public class SecurityConfig {
                         auth -> auth.requestMatchers(
                                         antMatcher("/health"),
                                         antMatcher("/accommodations"),
-                                        antMatcher("/api/auth/**"),
+                                        antMatcher("/auth/**"),
                                         antMatcher("/swagger-ui/**"),
                                         antMatcher("/v3/api-docs/**"),
                                         antMatcher("/error")
