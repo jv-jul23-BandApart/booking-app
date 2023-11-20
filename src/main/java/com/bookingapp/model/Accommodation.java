@@ -1,17 +1,17 @@
 package com.bookingapp.model;
 
+import com.bookingapp.converter.AmenityConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,13 +39,9 @@ public class Accommodation {
     @Column(nullable = false)
     private String size;
 
-    @ManyToMany
-    @JoinTable(
-            name = "accomodations_amenities",
-            joinColumns = @JoinColumn(name = "accommodation_id"),
-            inverseJoinColumns = @JoinColumn(name = "amenity_id")
-    )
-    private List<Amenity> amenities;
+    @Convert(converter = AmenityConverter.class)
+    @Column(name = "amenities", nullable = false)
+    private List<Amenity> amenities = new ArrayList<>();
 
     @Column(name = "daily_rate", nullable = false)
     private BigDecimal dailyRate;
@@ -56,10 +52,20 @@ public class Accommodation {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    private enum Type {
+    public enum Type {
         HOUSE,
         APARTMENT,
         CONDO,
         VACATION_HOME
+    }
+
+    public enum Amenity {
+        PARKING,
+        POOL,
+        WASHING_MACHINE,
+        GYM,
+        WIFI,
+        PETS_ALLOWED,
+        BALCONY
     }
 }
