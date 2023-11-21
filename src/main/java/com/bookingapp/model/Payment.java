@@ -13,7 +13,6 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import java.net.URL;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +35,7 @@ public class Payment {
     private Booking booking;
 
     @Column(nullable = false)
-    private URL url;
+    private String url;
 
     @Column(name = "session_id", nullable = false)
     private String sessionId;
@@ -44,7 +43,7 @@ public class Payment {
     @Column(name = "amount_to_pay", nullable = false)
     private BigDecimal amountToPay;
 
-    private enum Status {
+    public enum Status {
         PENDING,
         EXPIRED
     }
