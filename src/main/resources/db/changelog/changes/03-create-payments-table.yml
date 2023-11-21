@@ -15,7 +15,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: status
-                  type: varchar
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
@@ -26,12 +26,12 @@ databaseChangeLog:
                     references: bookings(id)
               - column:
                   name: url
-                  type: varchar
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: session_id
-                  type: varchar
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
