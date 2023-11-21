@@ -5,7 +5,7 @@ services:
     depends_on:
       - book-db
     restart: on-failure
-    image: online-book-store
+    image: booking-app
     build: .
     env_file: ./.env
     ports:
