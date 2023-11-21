@@ -37,7 +37,7 @@ public class StripeSessionProvider {
                                 .setUnitAmountDecimal(payment.getAmountToPay())
                                 .setProductData(builder()
                                         .setName("Payment")
-                                        .setDescription(booking.getAccommodationId()
+                                        .setDescription(booking.getAccommodation()
                                                 .getType() + " booking")
                                         .build())
                                 .build())
