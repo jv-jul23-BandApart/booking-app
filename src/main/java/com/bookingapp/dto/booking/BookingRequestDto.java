@@ -3,9 +3,8 @@ package com.bookingapp.dto.booking;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Positive;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public record BookingRequestDto(
         @FutureOrPresent

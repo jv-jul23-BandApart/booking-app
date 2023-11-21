@@ -12,9 +12,9 @@ import com.bookingapp.model.User;
 import com.bookingapp.repository.AccommodationRepository;
 import com.bookingapp.repository.BookingRepository;
 import com.bookingapp.service.BookingService;
+import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

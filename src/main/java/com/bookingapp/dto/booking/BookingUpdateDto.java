@@ -1,9 +1,7 @@
 package com.bookingapp.dto.booking;
 
-import jakarta.validation.constraints.Positive;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public record BookingUpdateDto(
         @DateTimeFormat(pattern = "yyyy-MM-dd")
