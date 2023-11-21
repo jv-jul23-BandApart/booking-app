@@ -27,7 +27,7 @@ public class Payment {
     private Long id;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Status status;
 
     @MapsId
