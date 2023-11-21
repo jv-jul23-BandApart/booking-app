@@ -38,7 +38,7 @@ public class PaymentServiceImpl implements PaymentService {
             System.out.println(status);
             System.out.println(session.getUrl());
             System.out.println(session.getId());
-            payment.setId(Long.valueOf(session.getId()));
+            payment.setSessionId(session.getId());
             payment.setUrl(session.getUrl());
         } catch (StripeException e) {
             throw new RuntimeException(e);

@@ -28,7 +28,6 @@ public class StripeSessionProvider {
     public Session createSession(Payment payment, Booking booking) throws StripeException {
         SessionCreateParams params = SessionCreateParams.builder()
                 .setMode(SessionCreateParams.Mode.PAYMENT)
-                .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setSuccessUrl(localDomain + "/success")
                 .setCancelUrl(localDomain + "/cancel")
                 .addLineItem(SessionCreateParams.LineItem.builder()

@@ -29,6 +29,7 @@ public class PaymentController {
             description = "Initiates payment sessions for booking transactions.")
     @GetMapping("/success")
     public String successOperation() {
+        System.out.println("42142342");
         return "Successful operation!";
     }
 }
