@@ -30,7 +30,7 @@ public class Accommodation {
     private Long id;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Type type;
 
     @Column(nullable = false)
