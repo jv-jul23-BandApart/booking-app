@@ -20,7 +20,6 @@ public class StripeSessionProvider {
     @Value("${local.domain}")
     private String localDomain;
 
-
     @PostConstruct
     public void init() {
         Stripe.apiKey = secretKey;
@@ -38,7 +37,8 @@ public class StripeSessionProvider {
                                 .setUnitAmountDecimal(payment.getAmountToPay())
                                 .setProductData(builder()
                                         .setName("Payment")
-                                        .setDescription(booking.getAccommodationId().getType() + " booking")
+                                        .setDescription(booking.getAccommodationId()
+                                                .getType() + " booking")
                                         .build())
                                 .build())
                         .setQuantity(1L)
