@@ -33,7 +33,7 @@ databaseChangeLog:
                   name: user_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_user_id
+                    foreignKeyName: fk_booking_user_id
                     references: users(id)
               - column:
                   name: status
