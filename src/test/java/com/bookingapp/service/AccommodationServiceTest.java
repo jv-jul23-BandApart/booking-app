@@ -5,6 +5,7 @@ import static com.bookingapp.model.Accommodation.Amenity.WIFI;
 import static com.bookingapp.model.Accommodation.Type.HOUSE;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.verify;
@@ -23,7 +24,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -89,7 +89,7 @@ class AccommodationServiceTest {
 
         when(repository.findById(invalidId)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(EntityNotFoundException.class,
+        assertThrows(EntityNotFoundException.class,
                 () -> accommodationService.findById(invalidId));
     }
 
@@ -130,7 +130,7 @@ class AccommodationServiceTest {
 
         when(repository.findById(invalidId)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(EntityNotFoundException.class,
+        assertThrows(EntityNotFoundException.class,
                 () -> accommodationService.findById(invalidId));
     }
 
