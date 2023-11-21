@@ -31,13 +31,10 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = new Payment();
         payment.setStatus(Payment.Status.PENDING);
         payment.setAmountToPay(calculateAmountToPay(booking));
-        System.out.println(payment);
         try {
             Session session = stripeSessionProvider.createSession(payment, booking);
             String status = session.getStatus();
-            System.out.println(status);
-            System.out.println(session.getUrl());
-            System.out.println(session.getId());
+            session.getPaymentStatus();
             payment.setSessionId(session.getId());
             payment.setUrl(session.getUrl());
         } catch (StripeException e) {
