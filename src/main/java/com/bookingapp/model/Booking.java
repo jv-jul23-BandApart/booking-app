@@ -21,8 +21,8 @@ import org.hibernate.annotations.Where;
 @Getter
 @Setter
 @Table(name = "bookings")
-@SQLDelete(sql = "UPDATE bookings SET is_deleted = true WHERE id = ?")
-@Where(clause = "is_deleted=false")
+@SQLDelete(sql = "UPDATE bookings SET status ='CANCELED' WHERE id = ?")
+@Where(clause = "status != 'CANCELED'")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,10 +44,7 @@ public class Booking {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status;
-
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
+    private Status status = Status.PENDING;
 
     public enum Status {
         PENDING,
