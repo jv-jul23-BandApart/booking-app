@@ -49,6 +49,7 @@ public class UserController {
     @Operation(summary = "Update roles by id",
             description = "Update user roles by user id in DB")
     @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/{id}/role")
     public UserWithRolesResponseDto updateUserRoles(
             @PathVariable @Positive Long id,
             @RequestBody @Valid UserRolesUpdateRequestDto requestDto) {
