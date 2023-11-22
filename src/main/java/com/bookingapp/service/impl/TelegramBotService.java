@@ -47,7 +47,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
     }
 
     private void startCommandResponse(String chatId, String firstName) {
-        String answer = "Hello, " + firstName + ", very glad to see you.";
+        String answer = "Hello143, " + firstName + ", very glad to see you.";
         sendMessage(chatId, answer);
     }
 
