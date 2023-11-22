@@ -34,9 +34,9 @@ public class PaymentServiceImpl implements PaymentService {
         try {
             Session session = stripeSessionProvider.createSession(payment, booking);
             String status = session.getStatus();
-            session.getPaymentStatus();
             payment.setSessionId(session.getId());
             payment.setUrl(session.getUrl());
+
         } catch (StripeException e) {
             throw new RuntimeException(e);
         }
@@ -48,4 +48,5 @@ public class PaymentServiceImpl implements PaymentService {
                 .datesUntil(booking.getCheckOutDate()).count());
         return booking.getAccommodation().getDailyRate().multiply(amountOfDays);
     }
+
 }
