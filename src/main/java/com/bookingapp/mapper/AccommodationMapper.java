@@ -3,7 +3,6 @@ package com.bookingapp.mapper;
 import com.bookingapp.dto.accommodation.AccommodationDto;
 import com.bookingapp.dto.accommodation.AccommodationRequestDto;
 import com.bookingapp.model.Accommodation;
-import java.util.List;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,8 +19,6 @@ public interface AccommodationMapper {
     Accommodation toAccommodation(AccommodationRequestDto accommodationDto);
 
     AccommodationDto toDto(Accommodation accommodation);
-
-    List<AccommodationDto> toDtoList(List<Accommodation> accommodations);
 
     @Mapping(target = "type", source = "requestDto.type")
     void updateAccommodationFromDto(AccommodationRequestDto requestDto,
