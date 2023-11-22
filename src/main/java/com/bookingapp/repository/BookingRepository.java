@@ -12,7 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
+    @Query("SELECT b FROM Booking b WHERE (:userId IS NULL OR b.user.id = :userId) AND (:status IS NULL OR b.status = :status)")
     List<Booking> findAllByUserIdAndStatus(Long userId, Booking.Status status);
+
+
 
     List<Booking> findAllByUserId(Long id);
 

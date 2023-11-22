@@ -77,8 +77,9 @@ public class BookingController {
 
     @GetMapping("/")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<BookingDto> getAllByStatusAndUserId(@RequestParam @Positive Long userId,
-                                                    @RequestParam Booking.Status status) {
+    public List<BookingDto> getAllByStatusAndUserId(
+            @RequestParam(name = "user_id", required = false) @Positive Long userId,
+            @RequestParam(required = false) Booking.Status status) {
         return bookingService.findByUserIdAndStatus(userId, status);
     }
 }

@@ -24,12 +24,12 @@ public class TelegramBotService extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "band_apart_booking_bot";
+        return "apart_booking_bot";
     }
 
     @Override
     public String getBotToken() {
-        return "6675755812:AAHyMHhAjOMkd05ovuDsISblpnGnGJilDlI";
+        return "6520677831:AAHeP3D-GutImMOEcp5p0skxATIMJFqttmI";
     }
 
     @Override
