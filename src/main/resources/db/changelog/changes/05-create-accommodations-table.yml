@@ -40,7 +40,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: availability
-                  type: bigint
+                  type: int
                   constraints:
                     nullable: false
               - column:
