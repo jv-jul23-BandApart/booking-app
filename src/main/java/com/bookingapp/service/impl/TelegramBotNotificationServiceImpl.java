@@ -1,6 +1,7 @@
 package com.bookingapp.service.impl;
 
 import com.bookingapp.exception.TelegramException;
+import com.bookingapp.service.NotificationService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @Service
-public class TelegramBotService extends TelegramLongPollingBot {
+public class TelegramBotNotificationServiceImpl extends TelegramLongPollingBot
+        implements NotificationService {
     private static final String START_COMMAND = "/start";
 
-    @Value("${telegram.bot.username}")
+    @Value("${telegram.bot.token}")
     private String token;
 
-    @Value("${telegram.bot.token}")
+    @Value("${telegram.bot.username}")
     private String name;
 
     @Override
@@ -39,14 +41,14 @@ public class TelegramBotService extends TelegramLongPollingBot {
             String userId = message.getChatId().toString();
             String firstName = message.getFrom().getFirstName();
             if (message.getText().equals(START_COMMAND)) {
-                startCommandResponse(userId, firstName);
+                startCommand(userId, firstName);
             } else {
                 sendMessage(userId, "This command is unavailable!");
             }
         }
     }
 
-    private void startCommandResponse(String chatId, String firstName) {
+    private void startCommand(String chatId, String firstName) {
         String answer = "Hello, " + firstName + ", very glad to see you.";
         sendMessage(chatId, answer);
     }
@@ -59,6 +61,18 @@ public class TelegramBotService extends TelegramLongPollingBot {
             execute(message);
         } catch (TelegramApiException e) {
             throw new TelegramException("Message not send: ", e);
+        }
+    }
+
+    @Override
+    public void userNotification(String notification) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(String.valueOf(sendMessage));
+        sendMessage.setText(notification);
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            throw new TelegramException("Can't send message: ", e);
         }
     }
 
