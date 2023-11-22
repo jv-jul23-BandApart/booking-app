@@ -49,7 +49,6 @@ public class AccommodationController {
                     default pagination (10 books per page) and sorting"""
     )
     @GetMapping
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'USER'})")
     public List<AccommodationDto> getAll(@ParameterObject @PageableDefault Pageable pageable) {
         return service.getAll(pageable);
     }
@@ -59,7 +58,6 @@ public class AccommodationController {
             description = """
                     Get an accommodation by its id. Parameter to be specified: accommodation id""")
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'USER'})")
     public AccommodationDto getById(@PathVariable @Positive Long id) {
         return service.findById(id);
     }

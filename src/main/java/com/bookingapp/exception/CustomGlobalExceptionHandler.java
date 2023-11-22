@@ -43,6 +43,12 @@ public class CustomGlobalExceptionHandler {
         return createResponseEntity(errorDto, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(BookingException.class)
+    protected ResponseEntity<Object> handleBookingException(BookingException ex) {
+        return createResponseEntity(
+                new ErrorDto(LocalDateTime.now(), ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
     private ResponseEntity<Object> createResponseEntity(ErrorDto errorDto, HttpStatus status) {
         return new ResponseEntity<>(errorDto, status);
     }
