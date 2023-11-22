@@ -1,7 +1,10 @@
 package com.bookingapp.mapper;
 
+import com.bookingapp.dto.payment.PaymentResponseDto;
+import com.bookingapp.model.Payment;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
 
 @Mapper(
@@ -10,5 +13,6 @@ import org.mapstruct.NullValueCheckStrategy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR
 )
 public interface PaymentMapper {
-    //Payment toEntity(PaymentRequestDto paymentRequestDto);
+    @Mapping(source = "booking.id", target = "bookingId")
+    PaymentResponseDto toDto(Payment payment);
 }
