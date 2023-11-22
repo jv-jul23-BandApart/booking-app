@@ -36,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
             String status = session.getStatus();
             payment.setSessionId(session.getId());
             payment.setUrl(session.getUrl());
-            Payment save = paymentRepository.save(payment);
+            System.out.println(session.getUrl());
         } catch (StripeException e) {
             throw new RuntimeException(e);
         }

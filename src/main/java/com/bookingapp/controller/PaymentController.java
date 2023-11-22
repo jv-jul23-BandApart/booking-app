@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Payment", description = "Endpoints for payment")
@@ -25,10 +26,10 @@ public class PaymentController {
         paymentService.createPayment(bookingId);
     }
 
-    @Operation(summary = "Create payment",
-            description = "Initiates payment sessions for booking transactions.")
+    @Operation(summary = "Success payment operation",
+            description = "Initiates payment success status")
     @GetMapping("/success")
-    public String successOperation() {
+    public String successOperation(@RequestParam("session_id") String sessionId) {
         System.out.println("42142342");
         return "Successful operation!";
     }
