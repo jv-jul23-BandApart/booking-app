@@ -13,20 +13,16 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
+                    foreignKeyName: fk_payments_booking_id
+                    references: bookings(id)
               - column:
                   name: status
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: booking_id
-                  type: bigint
-                  constraints:
-                    foreignKeyName: fk_booking_id
-                    references: bookings(id)
-              - column:
                   name: url
-                  type: varchar(255)
+                  type: varchar(1024)
                   constraints:
                     nullable: false
               - column:
