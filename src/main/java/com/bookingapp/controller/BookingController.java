@@ -44,7 +44,7 @@ public class BookingController {
         User user = (User) authentication.getPrincipal();
         return bookingService.createBooking(requestDto, user);
     }
-
+    
     @GetMapping("/my")
     @PreAuthorize("hasAuthority('USER')")
     public List<BookingDto> getBookingsOfUser(Authentication authentication) {
