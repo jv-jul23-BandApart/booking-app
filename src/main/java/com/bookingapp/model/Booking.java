@@ -21,7 +21,7 @@ import org.hibernate.annotations.Where;
 @Getter
 @Setter
 @Table(name = "bookings")
-@SQLDelete(sql = "UPDATE bookings SET status = 'CANCELED' WHERE id = ?")
+@SQLDelete(sql = "UPDATE bookings SET status ='CANCELED' WHERE id = ?")
 @Where(clause = "status != 'CANCELED'")
 public class Booking {
     @Id
