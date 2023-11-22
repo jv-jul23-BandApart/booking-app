@@ -30,7 +30,7 @@ public class UserController {
                     Get a profile information(id, email, firstname, lastname)
                      about current logged-in user from DB
                     """)
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/me")
     public UserResponseDto getProfile() {
         return userService.getCurrentUserProfileInfo();
@@ -40,15 +40,15 @@ public class UserController {
             description = """
                     Update an  information(email, firstname, lastname) in current
                     logged-in user profile in DB""")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/me", method = {RequestMethod.PATCH, RequestMethod.PUT})
-    public UserResponseDto updateProfile(UserUpdateRequestDto requestDto) {
+    public UserResponseDto updateProfile(@RequestBody @Valid UserUpdateRequestDto requestDto) {
         return userService.updateCurrentUserProfileInfo(requestDto);
     }
     
     @Operation(summary = "Update roles by id",
             description = "Update user roles by user id in DB")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/{id}/role")
     public UserWithRolesResponseDto updateUserRoles(
             @PathVariable @Positive Long id,
