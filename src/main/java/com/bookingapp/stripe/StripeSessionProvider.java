@@ -30,6 +30,7 @@ public class StripeSessionProvider {
                 .setMode(SessionCreateParams.Mode.PAYMENT)
                 .setSuccessUrl(localDomain + "/success?session_id={CHECKOUT_SESSION_ID}")
                 .setCancelUrl(localDomain + "/cancel")
+                .setExpiresAt(10L)
                 .addLineItem(SessionCreateParams.LineItem.builder()
                         .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
                                 .setCurrency(CURRENCY)
