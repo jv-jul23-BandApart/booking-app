@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-bookings-set
+      author: band_apart
+      changes:
+        - createTable:
+            tableName: bookings
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: check_in_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: check_out_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: accommodation_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_accommodation_id
+                    references: accommodations(id)
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_booking_user_id
+                    references: users(id)
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

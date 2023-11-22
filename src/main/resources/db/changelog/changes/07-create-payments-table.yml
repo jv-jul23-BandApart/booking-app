@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-payments-table
+      author: band_apart
+      changes:
+        - createTable:
+            tableName: payments
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: booking_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_booking_id
+                    references: bookings(id)
+              - column:
+                  name: url
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: session_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount_to_pay
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
