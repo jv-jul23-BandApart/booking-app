@@ -14,6 +14,7 @@ import com.bookingapp.repository.AccommodationRepository;
 import com.bookingapp.repository.BookingRepository;
 import com.bookingapp.repository.PaymentRepository;
 import com.bookingapp.service.BookingService;
+import com.bookingapp.service.NotificationService;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,6 +27,7 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final AccommodationRepository accommodationRepository;
     private final BookingMapper bookingMapper;
+    private final NotificationService notificationService;
     private final PaymentRepository paymentRepository;
 
     @Transactional
@@ -45,6 +47,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingMapper.toBooking(bookingRequestDto);
         booking.setUser(user);
         booking.setAccommodation(accommodation);
+        notificationService.bookingToMessage(booking, accommodation);
         return bookingMapper.toDto(bookingRepository.save(booking));
     }
 
@@ -79,6 +82,7 @@ public class BookingServiceImpl implements BookingService {
                 -> new EntityNotFoundException("You haven't booking with id: %d".formatted(id))
         );
         bookingRepository.delete(booking);
+        notificationService.bookingUnsuccessfulToMessage(booking);
     }
 
     @Override
