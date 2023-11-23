@@ -7,6 +7,6 @@ public record PaymentResponseDto(
         Long id,
         Payment.Status status,
         Long bookingId,
-        BigDecimal amountToPay
-) {
+        BigDecimal amountToPay,
+        String sessionId) {
 }
