@@ -2,7 +2,7 @@
 #### <h4 align="center"> `The best application to plan your vacation!` </h4>
 
 ### 👋 Introduction
-`The Booking application aims to provide an efficient and user-friendly platform for booking. It helps to both, customers and administrators, allowing customers to browse available accommodations, make reservations, and process payments securely, while administrators can manage accommodations, and track payments and SuperAdmin can change users and admins roles`
+`The main goal of the Booking application is to offer a platform for booking that is both efficient and user-friendly. This platform benefits both customers and administrators by enabling customers to explore and book available accommodations securely, make reservations, and complete payments. At the same time, administrators have the capability to oversee accommodations, monitor payments, and SuperAdmins can modify user and admin roles`
 
 ### 👩‍💻 Technologies Used
 `The following technologies are used to build the Booking application:`
@@ -72,4 +72,4 @@
 ### 🤝 Contribution Guidelines
 `We welcome contributions to this project:`
 
-Please create a new branch for each feature or bug fix and submit a pull request to the `main` branch. All PRs must be reviewed and approved by at least one team member before merging.
+For every new feature or bug fix, please establish a separate branch and initiate a pull request to the primary branch. Prior to merging, it is imperative that all pull requests undergo thorough review and receive approval from at least one team member.
