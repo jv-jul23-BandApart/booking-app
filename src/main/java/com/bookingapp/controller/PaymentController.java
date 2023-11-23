@@ -66,7 +66,7 @@ public class PaymentController {
 
     @Operation(summary = "Canceled payment operation",
             description = "Initiates payment canceled status")
-    @GetMapping("/canceled")
+    @GetMapping("/cancel")
     public String canceledOperation() {
         return """
                 Canceled operation!

@@ -6,6 +6,7 @@ import com.bookingapp.exception.PaymentException;
 import com.bookingapp.mapper.PaymentMapper;
 import com.bookingapp.model.Booking;
 import com.bookingapp.model.Payment;
+import com.bookingapp.repository.AccommodationRepository;
 import com.bookingapp.repository.BookingRepository;
 import com.bookingapp.repository.PaymentRepository;
 import com.bookingapp.service.PaymentService;
@@ -26,6 +27,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final BookingRepository bookingRepository;
     private final StripeSessionProvider stripeSessionProvider;
     private final PaymentMapper paymentMapper;
+    private final AccommodationRepository accommodationRepository;
 
     @Transactional
     @Override
@@ -96,7 +98,7 @@ public class PaymentServiceImpl implements PaymentService {
     private BigDecimal calculateAmountToPay(Booking booking) {
         BigDecimal amountOfDays = BigDecimal.valueOf(booking.getCheckInDate()
                 .datesUntil(booking.getCheckOutDate()).count());
-        return booking.getAccommodation().getDailyRate().multiply(amountOfDays);
+        return booking.getAccommodation().getDailyRate()
+                .multiply(amountOfDays).multiply(BigDecimal.valueOf(100));
     }
-
 }
