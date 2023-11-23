@@ -11,7 +11,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,8 +41,8 @@ public class Payment {
     @Column(name = "amount_to_pay", nullable = false)
     private BigDecimal amountToPay;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDate createdAt;
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public enum Status {
         PENDING,
