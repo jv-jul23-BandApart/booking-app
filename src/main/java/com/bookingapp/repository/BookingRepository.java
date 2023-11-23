@@ -31,4 +31,10 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     Integer countBookingsBetweenDates(@Param("accommodationId") Long id,
                                       @Param("checkIn") LocalDate checkInDate,
                                       @Param("checkOut") LocalDate checkOutDate);
+
+    List<Booking> findAllByCheckOutDateEqualsAndStatusIs(LocalDate date,
+                                                           Booking.Status status);
+
+    List<Booking> findAllByCheckInDateEqualsAndStatusIs(LocalDate date,
+                                                        Booking.Status status);
 }
