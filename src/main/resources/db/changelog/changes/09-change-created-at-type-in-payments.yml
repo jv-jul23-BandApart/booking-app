@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: change-created-at-type-in-payments
+      author: band_apart
+      changes:
+        - modifyDataType:
+            columnName: created_at
+            newDataType: timestamp
+            tableName: payments
