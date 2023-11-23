@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     
     private void setUserRoles(Set<Long> rolesId, User user) {
         Set<Role> roles = new HashSet<>(roleRepository.findAllById(rolesId));
-        if(!roles.isEmpty()) {
+        if (!roles.isEmpty()) {
             user.setRoles(roles);
         } else {
             throw new ChangingRoleException("There is no roles with such ids: " + rolesId);
