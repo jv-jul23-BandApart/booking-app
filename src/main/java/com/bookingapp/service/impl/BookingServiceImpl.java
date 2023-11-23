@@ -48,7 +48,6 @@ public class BookingServiceImpl implements BookingService {
         return bookingMapper.toDto(bookingRepository.save(booking));
     }
 
-
     @Override
     public List<BookingDto> getAll(Long userId) {
         return bookingRepository.findAllByUserId(userId).stream()
@@ -98,9 +97,10 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
-    private void validateExistingBookingForAccommodation(BookingRequestDto bookingRequestDto, User user) {
-        List<Booking> bookingsList = bookingRepository.findAllByUserIdAndAccommodationId(user.getId(),
-                bookingRequestDto.accommodationId());
+    private void validateExistingBookingForAccommodation(
+            BookingRequestDto bookingRequestDto, User user) {
+        List<Booking> bookingsList = bookingRepository.findAllByUserIdAndAccommodationId(
+                user.getId(), bookingRequestDto.accommodationId());
         if (!bookingsList.isEmpty()) {
             throw new BookingException("You already have booking for accommodation with id: %d"
                     .formatted(bookingRequestDto.accommodationId()));

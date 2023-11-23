@@ -3,7 +3,6 @@ package com.bookingapp.validation;
 import com.bookingapp.dto.booking.BookingRequestDto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 import java.time.LocalDate;
 
 public class CheckInDateBeforeValidator implements ConstraintValidator<CheckInDateBefore,

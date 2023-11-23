@@ -1,10 +1,9 @@
 package com.bookingapp.dto.booking;
 
-import java.time.LocalDate;
-
 import com.bookingapp.validation.CheckInDateBefore;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
+import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @CheckInDateBefore(fields = {"checkInDate", "checkOutDate"})
