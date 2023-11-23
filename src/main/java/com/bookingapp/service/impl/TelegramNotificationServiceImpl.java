@@ -1,12 +1,12 @@
 package com.bookingapp.service.impl;
 
-import java.time.format.DateTimeFormatter;
 import com.bookingapp.exception.TelegramException;
 import com.bookingapp.model.Accommodation;
 import com.bookingapp.model.Booking;
 import com.bookingapp.model.Payment;
 import com.bookingapp.service.NotificationService;
 import jakarta.annotation.PostConstruct;
+import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -96,7 +96,7 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
                Check-in Date: %s
                Check-out Date: %s
                Customer Email: %s
-               """;
+                """;
 
         String notification = String.format(
                 message,
@@ -116,12 +116,11 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
             Your booking for %s was unsuccessful.
             Customer: %s
             Check-in: %s, Check-out: %s
-            """;
+                """;
         String notification = String.format(message, booking.getAccommodation().getType(),
                 booking.getUser().getEmail(), booking.getCheckInDate(), booking.getCheckOutDate());
         userNotification(notification);
     }
-
 
     @Override
     public void paymentToMessage(Payment payment) {
@@ -130,8 +129,9 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
             Your booking (ID: %s) has been successfully paid for!
             Amount: $%s
             Payment Status: %s
-            """;
-        String notification = String.format(messageToUser, payment.getId(), payment.getAmountToPay(),
+                """;
+        String notification = String.format(messageToUser, payment.getId(),
+                payment.getAmountToPay(),
                 payment.getStatus());
         userNotification(notification);
     }
@@ -143,12 +143,12 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
             But your payment for booking (ID: %s) has been declined.
             Amount: $%s
             Payment Status: %s
-            """;
-        String notification = String.format(messageToUser, payment.getId(), payment.getAmountToPay(),
+                 """;
+        String notification = String.format(messageToUser, payment.getId(),
+                payment.getAmountToPay(),
                 payment.getStatus());
         userNotification(notification);
     }
-
 
     @PostConstruct
     public void init() {

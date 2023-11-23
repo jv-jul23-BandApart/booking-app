@@ -109,7 +109,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Transactional
     public void cancelPayment(String sessionId) {
         Payment payment = paymentRepository.findBySessionId(sessionId)
-                .orElseThrow(() -> new EntityNotFoundException("Can't find payment by this sessionId"));
+                .orElseThrow(() ->
+                   new EntityNotFoundException("Can't find payment by this sessionId"));
         Booking booking = payment.getBooking();
         booking.setStatus(Booking.Status.CANCELED);
         payment.setStatus(Payment.Status.EXPIRED);
