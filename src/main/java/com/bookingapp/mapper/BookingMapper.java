@@ -13,8 +13,7 @@ import org.mapstruct.NullValueCheckStrategy;
 @Mapper(
         componentModel = "spring",
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
-        implementationPackage = "<PACKAGE_NAME>.impl")
+        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface BookingMapper {
 
     Booking toBooking(BookingRequestDto bookingRequestDto);
