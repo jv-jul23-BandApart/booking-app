@@ -1,9 +1,8 @@
 package com.bookingapp.repository;
 
 import com.bookingapp.model.Payment;
-import java.util.Optional;
-
 import com.bookingapp.model.User;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
