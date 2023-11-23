@@ -41,7 +41,7 @@ public class SecurityConfig {
                                         antMatcher("/payments/success"),
                                         antMatcher("/payments"),
                                         antMatcher("/health"),
-                                        antMatcher("/accommodations"),
+                                        antMatcher("/accommodations/**"),
                                         antMatcher("/auth/**"),
                                         antMatcher("/swagger-ui/**"),
                                         antMatcher("/v3/api-docs/**"),

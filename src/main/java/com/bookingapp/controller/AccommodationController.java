@@ -1,6 +1,7 @@
 package com.bookingapp.controller;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import com.bookingapp.dto.accommodation.AccommodationDto;
 import com.bookingapp.dto.accommodation.AccommodationRequestDto;
@@ -70,7 +71,7 @@ public class AccommodationController {
             summary = "Update accommodation",
             description = "Update accommodation with a new values"
     )
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public AccommodationDto updateById(@PathVariable @Positive Long id,
                                        @RequestBody @Valid AccommodationRequestDto requestDto) {
@@ -82,6 +83,7 @@ public class AccommodationController {
             description = "Delete accommodation. Parameters to be specified: accommodation id")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
+    @ResponseStatus(NO_CONTENT)
     public void deleteById(@PathVariable @Positive Long id) {
         service.deleteById(id);
     }
