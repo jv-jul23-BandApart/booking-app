@@ -40,6 +40,9 @@ class BookingServiceTest {
     @Mock
     private PaymentRepository paymentRepository;
 
+    @Mock
+    private NotificationService notificationService;
+
     @Spy
     private BookingMapper mapper = Mappers.getMapper(BookingMapper.class);
 
