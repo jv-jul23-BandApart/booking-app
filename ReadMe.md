@@ -2,7 +2,7 @@
 #### <h4 align="center"> `The best application to plan your vacation!` </h4>
 
 ### 👋 Introduction
-`The Booking application aims to provide an efficient and user-friendly platform for booking . It caters to both customers and administrators, allowing customers to browse available accommodations, make reservations, and process payments securely, while administrators can manage accommodations, user roles, and track payments`
+`The Booking application aims to provide an efficient and user-friendly platform for booking . It helps to both, customers and administrators, allowing customers to browse available accommodations, make reservations, and process payments securely, while administrators can manage accommodations, user roles, and track payments`
 
 ### 👩‍💻 Technologies Used
 `The following technologies are used to build the Booking application:`
@@ -67,7 +67,7 @@
 ### 📱 Telegram Notifications
 `The Booking app sends Telegram notifications for the following events:`
 - New booking created: Notifications are sent to all service administrators.
-- Overdue booking: If a booking is overdue (check_in date is in the past, and the booking is still not confirmed), notifications are sent to all service administrators.
+- Expired booking: If a booking is expired (check_in date is in the past, and the booking is still not confirmed), notifications are sent to all service administrators.
 
 ### 🤝 Contribution Guidelines
 `We welcome contributions to this project:`
