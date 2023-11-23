@@ -13,3 +13,7 @@ databaseChangeLog:
       - file: db/changelog/changes/06-create-bookings-table.yml
   - include:
       - file: db/changelog/changes/07-create-payments-table.yml
+  - include:
+      - file: db/changelog/changes/08-add-created-at-to-payments-table.yml
+  - include:
+        - file: db/changelog/changes/09-change-created-at-type-in-payments.yml
