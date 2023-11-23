@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-created-at-to-payment-tables
+      author: band_apart
+      changes:
+        - addColumn:
+            tableName: payments
+            columns:
+              - column:
+                  name: created_at
+                  type: date
+                  constraints:
+                    nullable: false

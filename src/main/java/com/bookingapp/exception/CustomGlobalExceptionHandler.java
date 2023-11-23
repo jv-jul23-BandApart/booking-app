@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler {
+    @ExceptionHandler(PaymentException.class)
+    protected ResponseEntity<Object> handlePaymentException(PaymentException ex) {
+        return createResponseEntity(
+                new ErrorDto(LocalDateTime.now(), ex.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(AuthenticationException.class)
     protected ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex) {
         return createResponseEntity(
@@ -45,6 +51,12 @@ public class CustomGlobalExceptionHandler {
 
     @ExceptionHandler(BookingException.class)
     protected ResponseEntity<Object> handleBookingException(BookingException ex) {
+        return createResponseEntity(
+                new ErrorDto(LocalDateTime.now(), ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(ChangingRoleException.class)
+    protected ResponseEntity<Object> handleChangingRoleException(ChangingRoleException ex) {
         return createResponseEntity(
                 new ErrorDto(LocalDateTime.now(), ex.getMessage()), HttpStatus.BAD_REQUEST);
     }

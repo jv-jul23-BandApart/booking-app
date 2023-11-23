@@ -37,8 +37,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth.requestMatchers(
+                                        antMatcher("/payments/cancel"),
+                                        antMatcher("/payments/success"),
+                                        antMatcher("/payments"),
                                         antMatcher("/health"),
-                                        antMatcher("/accommodations"),
+                                        antMatcher("/accommodations/**"),
                                         antMatcher("/auth/**"),
                                         antMatcher("/swagger-ui/**"),
                                         antMatcher("/v3/api-docs/**"),

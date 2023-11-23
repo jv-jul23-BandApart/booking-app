@@ -8,9 +8,11 @@ import com.bookingapp.exception.EntityNotFoundException;
 import com.bookingapp.mapper.BookingMapper;
 import com.bookingapp.model.Accommodation;
 import com.bookingapp.model.Booking;
+import com.bookingapp.model.Payment;
 import com.bookingapp.model.User;
 import com.bookingapp.repository.AccommodationRepository;
 import com.bookingapp.repository.BookingRepository;
+import com.bookingapp.repository.PaymentRepository;
 import com.bookingapp.service.BookingService;
 import com.bookingapp.service.NotificationService;
 import jakarta.transaction.Transactional;
@@ -26,6 +28,7 @@ public class BookingServiceImpl implements BookingService {
     private final AccommodationRepository accommodationRepository;
     private final BookingMapper bookingMapper;
     private final NotificationService notificationService;
+    private final PaymentRepository paymentRepository;
 
     @Transactional
     @Override
@@ -39,6 +42,8 @@ public class BookingServiceImpl implements BookingService {
         validateDatesAndAvailability(accommodation,
                 bookingRequestDto.checkInDate(), bookingRequestDto.checkOutDate()
         );
+        validateExistingBookingForAccommodation(bookingRequestDto, user);
+        validateUnpaidBookings(user);
         Booking booking = bookingMapper.toBooking(bookingRequestDto);
         booking.setUser(user);
         booking.setAccommodation(accommodation);
@@ -93,6 +98,22 @@ public class BookingServiceImpl implements BookingService {
                 accommodation.getId(), checkInDate, checkOutDate);
         if (accommodation.getAvailability() <= count) {
             throw new BookingException("This accommodation is unavailable for this dates");
+        }
+    }
+
+    private void validateExistingBookingForAccommodation(
+            BookingRequestDto bookingRequestDto, User user) {
+        List<Booking> bookingsList = bookingRepository.findAllByUserIdAndAccommodationId(
+                user.getId(), bookingRequestDto.accommodationId());
+        if (!bookingsList.isEmpty()) {
+            throw new BookingException("You already have booking for accommodation with id: %d"
+                    .formatted(bookingRequestDto.accommodationId()));
+        }
+    }
+
+    private void validateUnpaidBookings(User user) {
+        if (paymentRepository.existsPaymentByBookingUserAndStatus(user, Payment.Status.PENDING)) {
+            throw new BookingException("You have pending payment");
         }
     }
 }

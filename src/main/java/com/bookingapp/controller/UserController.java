@@ -6,6 +6,7 @@ import com.bookingapp.dto.user.UserUpdateRequestDto;
 import com.bookingapp.dto.user.UserWithRolesResponseDto;
 import com.bookingapp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Users management", description = "Endpoints for managing users")
 @RestController
 @RequiredArgsConstructor
 @Validated
@@ -30,7 +32,7 @@ public class UserController {
                     Get a profile information(id, email, firstname, lastname)
                      about current logged-in user from DB
                     """)
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/me")
     public UserResponseDto getProfile() {
         return userService.getCurrentUserProfileInfo();
@@ -40,15 +42,15 @@ public class UserController {
             description = """
                     Update an  information(email, firstname, lastname) in current
                     logged-in user profile in DB""")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/me", method = {RequestMethod.PATCH, RequestMethod.PUT})
-    public UserResponseDto updateProfile(UserUpdateRequestDto requestDto) {
+    public UserResponseDto updateProfile(@RequestBody @Valid UserUpdateRequestDto requestDto) {
         return userService.updateCurrentUserProfileInfo(requestDto);
     }
     
     @Operation(summary = "Update roles by id",
             description = "Update user roles by user id in DB")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @RequestMapping("/{id}/role")
     public UserWithRolesResponseDto updateUserRoles(
             @PathVariable @Positive Long id,
