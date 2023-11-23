@@ -39,7 +39,6 @@ public class SecurityConfig {
                         auth -> auth.requestMatchers(
                                         antMatcher("/payments/cancel"),
                                         antMatcher("/payments/success"),
-                                        antMatcher("/payments"),
                                         antMatcher("/health"),
                                         antMatcher("/accommodations/**"),
                                         antMatcher("/auth/**"),
