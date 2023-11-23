@@ -18,4 +18,6 @@ public interface NotificationService {
     void paymentFailedToMessage(Payment payment);
 
     void getMessageToExpiredBookings(List<Booking> bookings);
+
+    void getMessageToEndedBookings(List<Booking> bookings);
 }

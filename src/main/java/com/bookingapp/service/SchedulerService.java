@@ -31,6 +31,7 @@ public class SchedulerService {
                         Booking.Status.CONFIRMED)
                 .stream().peek(p -> p.setStatus(Booking.Status.CANCELED)).toList();
         bookingRepository.saveAll(bookings);
+        notificationService.getMessageToEndedBookings(bookings);
     }
 
     @Scheduled(cron = "${cron.payments.interval}")

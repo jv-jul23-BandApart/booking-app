@@ -95,7 +95,7 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
                Accommodation Type: %s
                Check-in Date: %s
                Check-out Date: %s
-               Customer Id: %d
+               Customer Id: %s
                 """;
 
         String notification = String.format(
@@ -113,7 +113,7 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
     public void bookingDeleteToMessage(Booking booking) {
         String message = """
             Booking (ID: %s) was deleted.
-            Customer: %d
+            Customer: %s
             Check-in: %s, Check-out: %s
                 """;
         String notification = String.format(message, booking.getAccommodation().getType(),
@@ -149,7 +149,33 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
 
     @Override
     public void getMessageToExpiredBookings(List<Booking> bookings) {
+        String messageToUser;
+        if (bookings.isEmpty()) {
+            messageToUser = "No expired bookings today!";
+            userNotification(messageToUser);
+        } else {
+            messageToUser = """
+                    Expired bookings today: %d
+                    List of expired bookings:
+                    """;
+            String notification = String.format(messageToUser, bookings.size());
+            userNotification(notification);
+        }
+    }
 
+    @Override
+    public void getMessageToEndedBookings(List<Booking> bookings) {
+        String messageToUser;
+        if (bookings.isEmpty()) {
+            messageToUser = "No peoples that left accommodations!";
+            userNotification(messageToUser);
+        } else {
+            messageToUser = """
+                    Peoples are living accommodations today: %d
+                    """;
+            String notification = String.format(messageToUser, bookings.size());
+            userNotification(notification);
+        }
     }
 
     @PostConstruct
