@@ -34,8 +34,7 @@
 ![architecture.png](assets%2Farchitecture.png)
 
 ### 🛢️ Database structure:
-#### <h4 align="center"> ![DbPlan.png](assets%2FDbPlan.png) </h4>
-
+#### <h4 align="center">![img_3.png](assets/img_3.png) </h4>
 ###  API Endpoints
 `The Booking app provides the following API endpoints:`
 
