@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 @Table(name = "bookings")
 @SQLDelete(sql = "UPDATE bookings SET status ='CANCELED' WHERE id = ?")
 @Where(clause = "status != 'CANCELED'")
