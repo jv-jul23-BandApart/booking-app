@@ -9,6 +9,7 @@ import com.bookingapp.model.Payment;
 import com.bookingapp.repository.AccommodationRepository;
 import com.bookingapp.repository.BookingRepository;
 import com.bookingapp.repository.PaymentRepository;
+import com.bookingapp.service.NotificationService;
 import com.bookingapp.service.PaymentService;
 import com.bookingapp.stripe.StripeSessionProvider;
 import com.stripe.exception.StripeException;
@@ -28,6 +29,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final StripeSessionProvider stripeSessionProvider;
     private final PaymentMapper paymentMapper;
     private final AccommodationRepository accommodationRepository;
+    private final NotificationService notificationService;
 
     @Transactional
     @Override
@@ -81,6 +83,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(payment.getUrl());
+        notificationService.paymentToMessage(payment);
         return redirectView;
     }
 
@@ -100,5 +103,16 @@ public class PaymentServiceImpl implements PaymentService {
                 .datesUntil(booking.getCheckOutDate()).count());
         return booking.getAccommodation().getDailyRate()
                 .multiply(amountOfDays).multiply(BigDecimal.valueOf(100));
+    }
+
+    @Override
+    @Transactional
+    public void cancelPayment(String sessionId) {
+        Payment payment = paymentRepository.findBySessionId(sessionId)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find payment by this sessionId"));
+        Booking booking = payment.getBooking();
+        booking.setStatus(Booking.Status.CANCELED);
+        payment.setStatus(Payment.Status.EXPIRED);
+        notificationService.paymentFailedToMessage(payment);
     }
 }

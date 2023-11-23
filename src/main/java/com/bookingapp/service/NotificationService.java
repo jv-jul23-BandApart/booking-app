@@ -2,6 +2,7 @@ package com.bookingapp.service;
 
 import com.bookingapp.model.Accommodation;
 import com.bookingapp.model.Booking;
+import com.bookingapp.model.Payment;
 
 public interface NotificationService {
 
@@ -11,7 +12,7 @@ public interface NotificationService {
 
     void bookingUnsuccessfulToMessage(Booking booking);
 
-    void paymentToMessage();
+    void paymentToMessage(Payment payment);
 
-    void paymentFailedToMessage();
+    void paymentFailedToMessage(Payment payment);
 }

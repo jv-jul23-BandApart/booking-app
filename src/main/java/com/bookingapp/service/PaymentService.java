@@ -12,4 +12,6 @@ public interface PaymentService {
     RedirectView completePayment(String sessionId);
 
     List<PaymentResponseDto> getPaymentHistory(Long userId);
+
+    void cancelPayment(String sessionId);
 }
