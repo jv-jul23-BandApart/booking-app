@@ -67,7 +67,8 @@ public class PaymentController {
     @Operation(summary = "Canceled payment operation",
             description = "Initiates payment canceled status")
     @GetMapping("/cancel")
-    public String canceledOperation() {
+    public String canceledOperation(@RequestParam("session_id") String sessionId) {
+        paymentService.cancelPayment(sessionId);
         return """
                 Canceled operation!
                 The payment can be made later (but the session is available for only 24 hours);

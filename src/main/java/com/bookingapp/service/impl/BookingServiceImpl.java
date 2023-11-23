@@ -82,7 +82,7 @@ public class BookingServiceImpl implements BookingService {
                 -> new EntityNotFoundException("You haven't booking with id: %d".formatted(id))
         );
         bookingRepository.delete(booking);
-        notificationService.bookingUnsuccessfulToMessage(booking);
+        notificationService.bookingDeleteToMessage(booking);
     }
 
     @Override
