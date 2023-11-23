@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +32,18 @@ public class PaymentController {
     }
 
     @Operation(summary = "Returns user's payment history",
+            description = "Payment history for authenticated user")
+    @GetMapping("/history/me")
+    public List<PaymentResponseDto> getPersonalPaymentHistory(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return paymentService.getPaymentHistory(user.getId());
+    }
+
+    @Operation(summary = "Returns user's payment history by userId",
             description = "Payment history")
-    @GetMapping("/history")
-    public List<PaymentResponseDto> completePayment(@RequestParam("user_id") Long userId) {
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/history/{userId}")
+    public List<PaymentResponseDto> getPaymentHistoryById(@PathVariable Long userId) {
         return paymentService.getPaymentHistory(userId);
     }
 
