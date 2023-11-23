@@ -5,6 +5,7 @@ import com.bookingapp.dto.user.UserResponseDto;
 import com.bookingapp.dto.user.UserRolesUpdateRequestDto;
 import com.bookingapp.dto.user.UserUpdateRequestDto;
 import com.bookingapp.dto.user.UserWithRolesResponseDto;
+import com.bookingapp.exception.ChangingRoleException;
 import com.bookingapp.exception.EntityNotFoundException;
 import com.bookingapp.exception.RegistrationException;
 import com.bookingapp.mapper.UserMapper;
@@ -81,6 +82,10 @@ public class UserServiceImpl implements UserService {
     
     private void setUserRoles(Set<Long> rolesId, User user) {
         Set<Role> roles = new HashSet<>(roleRepository.findAllById(rolesId));
-        user.setRoles(roles);
+        if(!roles.isEmpty()) {
+            user.setRoles(roles);
+        } else {
+            throw new ChangingRoleException("There is no roles with such ids: " + rolesId);
+        }
     }
 }

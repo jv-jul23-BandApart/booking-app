@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-superadmin-roles
+      author: band_apart
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: SUPER_ADMIN

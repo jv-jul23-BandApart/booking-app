@@ -6,6 +6,7 @@ import com.bookingapp.dto.user.UserUpdateRequestDto;
 import com.bookingapp.dto.user.UserWithRolesResponseDto;
 import com.bookingapp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Users management", description = "Endpoints for managing users")
 @RestController
 @RequiredArgsConstructor
 @Validated
@@ -48,7 +50,7 @@ public class UserController {
     
     @Operation(summary = "Update roles by id",
             description = "Update user roles by user id in DB")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @RequestMapping("/{id}/role")
     public UserWithRolesResponseDto updateUserRoles(
             @PathVariable @Positive Long id,

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRolesUpdateRequestDto {
-    @NotEmpty(message = "You should enter one role id at least")
+    @NotEmpty(message = "you should enter one role id at least")
     private Set<Long> roleIds;
 
 }
