@@ -54,6 +54,12 @@ public class CustomGlobalExceptionHandler {
         return createResponseEntity(
                 new ErrorDto(LocalDateTime.now(), ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
+    
+    @ExceptionHandler(ChangingRoleException.class)
+    protected ResponseEntity<Object> handleChangingRoleException(ChangingRoleException ex) {
+        return createResponseEntity(
+                new ErrorDto(LocalDateTime.now(), ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
 
     private ResponseEntity<Object> createResponseEntity(ErrorDto errorDto, HttpStatus status) {
         return new ResponseEntity<>(errorDto, status);
