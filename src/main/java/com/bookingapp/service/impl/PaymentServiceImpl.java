@@ -67,6 +67,7 @@ public class PaymentServiceImpl implements PaymentService {
                 () -> new EntityNotFoundException("Can't find payment by this session id: "));
         booking.setStatus(Booking.Status.CONFIRMED);
         payment.setStatus(Payment.Status.PAID);
+        notificationService.paymentToMessage(payment);
     }
 
     @Override
@@ -82,7 +83,6 @@ public class PaymentServiceImpl implements PaymentService {
 
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(payment.getUrl());
-        notificationService.paymentToMessage(payment);
         return redirectView;
     }
 

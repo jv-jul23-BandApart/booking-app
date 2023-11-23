@@ -7,6 +7,7 @@ import com.bookingapp.model.Payment;
 import com.bookingapp.service.NotificationService;
 import jakarta.annotation.PostConstruct;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -87,15 +88,14 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
 
     @Override
     public void bookingToMessage(Booking booking, Accommodation accommodation) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         String message = """
-               Congratulations!
-               Your reservation was successful!
+               Added new reservation
                Accommodation Type: %s
                Check-in Date: %s
                Check-out Date: %s
-               Customer Email: %s
+               Customer Id: %d
                 """;
 
         String notification = String.format(
@@ -103,30 +103,28 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
                 accommodation.getType(),
                 booking.getCheckInDate().format(formatter),
                 booking.getCheckOutDate().format(formatter),
-                booking.getUser().getEmail()
+                booking.getUser().getId()
         );
 
         userNotification(notification);
     }
 
     @Override
-    public void bookingUnsuccessfulToMessage(Booking booking) {
+    public void bookingDeleteToMessage(Booking booking) {
         String message = """
-            I'm so sorry.
-            Your booking for %s was unsuccessful.
-            Customer: %s
+            Booking (ID: %s) was deleted.
+            Customer: %d
             Check-in: %s, Check-out: %s
                 """;
         String notification = String.format(message, booking.getAccommodation().getType(),
-                booking.getUser().getEmail(), booking.getCheckInDate(), booking.getCheckOutDate());
+                booking.getUser().getId(), booking.getCheckInDate(), booking.getCheckOutDate());
         userNotification(notification);
     }
 
     @Override
     public void paymentToMessage(Payment payment) {
         String messageToUser = """
-            Congratulations!
-            Your booking (ID: %s) has been successfully paid for!
+            Booking (ID: %s) has been successfully paid for!
             Amount: $%s
             Payment Status: %s
                 """;
@@ -139,8 +137,7 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
     @Override
     public void paymentFailedToMessage(Payment payment) {
         String messageToUser = """
-            I'm so sorry.
-            But your payment for booking (ID: %s) has been declined.
+            Payment for booking (ID: %s) has been declined.
             Amount: $%s
             Payment Status: %s
                  """;
@@ -148,6 +145,11 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
                 payment.getAmountToPay(),
                 payment.getStatus());
         userNotification(notification);
+    }
+
+    @Override
+    public void getMessageToExpiredBookings(List<Booking> bookings) {
+
     }
 
     @PostConstruct

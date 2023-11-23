@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class SchedulerService {
     private final PaymentRepository paymentRepository;
     private final BookingRepository bookingRepository;
+    private final NotificationService notificationService;
 
     @Scheduled(cron = "${cron.payments.interval}")
     private void trackExpiredStripeSession() {
@@ -39,5 +40,6 @@ public class SchedulerService {
                         Booking.Status.PENDING).stream()
                 .peek(p -> p.setStatus(Booking.Status.CANCELED)).toList();
         bookingRepository.saveAll(bookings);
+        notificationService.getMessageToExpiredBookings(bookings);
     }
 }
