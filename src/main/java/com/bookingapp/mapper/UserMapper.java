@@ -18,8 +18,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(
         componentModel = "spring",
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
-        implementationPackage = "<PACKAGE_NAME>.impl")
+        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface UserMapper {
     UserResponseDto toUserResponse(User user);
 
