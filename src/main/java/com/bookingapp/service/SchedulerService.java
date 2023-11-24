@@ -27,7 +27,7 @@ public class SchedulerService {
     @Scheduled(cron = "${cron.payments.interval}")
     private void setCanceledStatus() {
         List<Booking> bookings = bookingRepository
-                .findAllByCheckOutDateEqualsAndStatusIs(LocalDate.now(),
+                .findAllByCheckOutDateBeforeAndStatusIs(LocalDate.now().plusDays(1),
                         Booking.Status.CONFIRMED)
                 .stream().peek(p -> p.setStatus(Booking.Status.CANCELED)).toList();
         bookingRepository.saveAll(bookings);
@@ -37,7 +37,7 @@ public class SchedulerService {
     @Scheduled(cron = "${cron.payments.interval}")
     private void setExpiredStatus() {
         List<Booking> bookings = bookingRepository
-                .findAllByCheckInDateEqualsAndStatusIs(LocalDate.now(),
+                .findAllByCheckInDateBeforeAndStatusIs(LocalDate.now(),
                         Booking.Status.PENDING).stream()
                 .peek(p -> p.setStatus(Booking.Status.CANCELED)).toList();
         bookingRepository.saveAll(bookings);

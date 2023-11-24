@@ -156,7 +156,6 @@ public class TelegramNotificationServiceImpl extends TelegramLongPollingBot
         } else {
             messageToUser = """
                     Expired bookings today: %d
-                    List of expired bookings:
                     """;
             String notification = String.format(messageToUser, bookings.size());
             userNotification(notification);
